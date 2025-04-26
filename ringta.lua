@@ -1,4 +1,3 @@
-
 -- Create the ScreenGui
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "RINGTA BOND FARM"
@@ -87,25 +86,24 @@ task.spawn(function()
     dynamicLabel.Text = "Starting..." -- When executed
     wait(10)
     dynamicLabel.Text = "Collecting bonds data"
-    wait(17) -- 10 + 17 = 27 seconds
+    wait(17 + 14) -- Add 14 seconds delay to "Restarting script"
     dynamicLabel.Text = "Collecting bonds now"
-    wait(35) -- 27 + 35 = 62 seconds
+    wait(35 + 14) -- Add 14 seconds delay for the final text update
     dynamicLabel.Text = "Restarting script"
 end)
 
--- Timer logic for bonds collection with controlled pace and randomness
+-- Timer logic for bonds collection with controlled pace
 task.spawn(function()
-    wait(35) -- Start updating bonds at 28 seconds
+    wait(35 + 14) -- Start updating bonds at 35 seconds + 14 seconds delay
     local bonds = 1 -- Start from 1 bond
     local targetBonds = math.random(70, 90) -- Random target between 70 and 90 bonds
     local totalTime = 34 -- Total time to reach the target (seconds)
-    local elapsed = 0 -- Track elapsed time
-    while bonds < targetBonds and elapsed < totalTime do
-        local increment = math.random(2, 5) -- Randomly increment by 2-5 bonds
-        wait(totalTime / targetBonds) -- Proportional wait time per increment
-        bonds = math.min(bonds + increment, targetBonds) -- Ensure bonds don’t exceed target
+    local interval = totalTime / (targetBonds / math.random(2, 4)) -- Slow pace with varying increments
+
+    while bonds < targetBonds do
+        wait(interval) -- Adjust the increment interval dynamically
+        bonds = math.min(bonds + math.random(2, 5), targetBonds) -- Increment randomly by 2-5
         bondsLabel.Text = tostring(bonds) .. " bonds being collected"
-        elapsed = elapsed + (totalTime / targetBonds)
     end
     bondsLabel.Text = tostring(targetBonds) .. " bonds collected" -- Final result
 end)
