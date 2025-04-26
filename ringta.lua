@@ -95,7 +95,7 @@ end)
 
 -- Timer logic for bonds collection with controlled pace and randomness
 task.spawn(function()
-    wait(28) -- Start updating bonds at 28 seconds
+    wait(35) -- Start updating bonds at 28 seconds
     local bonds = 1 -- Start from 1 bond
     local targetBonds = math.random(70, 90) -- Random target between 70 and 90 bonds
     local totalTime = 34 -- Total time to reach the target (seconds)
