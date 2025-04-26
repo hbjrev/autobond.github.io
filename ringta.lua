@@ -92,7 +92,7 @@ task.spawn(function()
     dynamicLabel.Text = "Restarting script"
 end)
 
--- Timer logic for bonds collection with precise pacing
+-- Timer logic for bonds collection with precise pacing and synchronized final message
 task.spawn(function()
     wait(39 + 14) -- Start updating bonds after 39 seconds + 14 seconds delay
     local bonds = 1 -- Start from 1 bond
@@ -105,8 +105,11 @@ task.spawn(function()
         bonds = math.min(bonds + math.random(2, 5), targetBonds) -- Increment randomly by 2-5 bonds
         bondsLabel.Text = tostring(bonds) .. " bonds being collected"
     end
-    bondsLabel.Text = tostring(targetBonds) .. " bonds collected" -- Final display after 34 seconds
+    
+    -- Synchronize final bond number with "bonds collected"
+    bondsLabel.Text = tostring(targetBonds) .. " bonds collected"
 end)
+
 
 
 
